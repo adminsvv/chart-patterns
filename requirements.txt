@@ -1,1 +1,8 @@
+openai==1.66.3
+pandas==2.2.3
+streamlit==1.41.1
+yfinance==0.2.58
+mpl-finance==0.10.1
+matplotlib==3.10.7
+
 
