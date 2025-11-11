@@ -142,10 +142,10 @@ PATTERN_PROMPT = (
     "1-2-3 Pattern – 1 = sharp up move, 2 = slight move down against the prevailing trend, 3 = break the high of 1 sharp move.\n\n"
     "Cup and Handle – A rounded U shape followed by a small dip, suggesting accumulation before a bullish breakout.\n\n"
     "Triangle – Converging trendlines showing price compression, typically resolving in a breakout aligned with the prevailing trend.\n\n"
-    "Low Cheat – An early breakout entry setup within a base, entered near support before full pattern confirmation.\n\n"
+    "Low Cheat – After an uptrend a slight correction and a small range consolidation. Once the price breaks out of this consolidation its a buy signal/\n\n"
     "VCP (Volatility Contraction Pattern) – Series of smaller pullbacks with decreasing volatility and volume, showing supply drying up before a high-volume breakout from resistance.\n\n"
     "Inverted Head and Shoulders – A three-trough reversal formation where the middle trough is deepest, signaling a bullish reversal.\n\n"
-    "Engulfing / Reversal – A candlestick where a larger candle fully covers the previous one, possibly signaling a trend change, especially at key support/resistance.\n\n"
+    "Engulfing / Reversal – A candlestick where a larger candle fully covers the previous one,with close of the current candle below the last candle low  possibly signaling a trend change, especially at key support/resistance.\n\n"
     "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
 )
 
