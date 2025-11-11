@@ -91,7 +91,7 @@ def download_prices(ticker: str, end_date: dt.date, lookback_days: int = 200) ->
     # 4) EMAs
     df["EMA20"] = df["Close"].ewm(span=20, adjust=False).mean()
     df["EMA50"] = df["Close"].ewm(span=50, adjust=False).mean()
-    st.dataframe(df.head(), use_container_width=True)
+    st.dataframe(df.tail(), use_container_width=True)
     return df
 
 
