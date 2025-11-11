@@ -16,6 +16,43 @@ try:
 except Exception:  # pragma: no cover
     OpenAI = None
 
+def require_login() -> bool:
+    """
+    Simple username/password gate using Streamlit secrets.
+    - Configure in .streamlit/secrets.toml or st.secrets:
+        APP_USERNAME = "your_user"
+        APP_PASSWORD = "your_password"
+    - Returns True if authenticated; otherwise renders a login form and returns False.
+    """
+    if st.session_state.get("authenticated", False):
+        # Show a small logout option
+        with st.sidebar:
+            if st.button("Logout"):
+                st.session_state.clear()
+                st.rerun()
+        return True
+
+    username_secret = st.secrets.get("APP_USERNAME", "admin")
+    password_secret = st.secrets.get("APP_PASSWORD", "")
+
+    st.title("Login")
+    with st.form("login_form", clear_on_submit=False):
+        u = st.text_input("Username", value="", autocomplete="username")
+        p = st.text_input("Password", value="", type="password", autocomplete="current-password")
+        submitted = st.form_submit_button("Sign in")
+
+    if submitted:
+        if not password_secret:
+            st.error("Server is missing APP_PASSWORD in secrets.")
+            return False
+        if u == username_secret and p == password_secret:
+            st.session_state.authenticated = True
+            st.success("Logged in successfully.")
+            st.rerun()
+        else:
+            st.error("Invalid username or password.")
+    return False
+
 
 def get_api_key() -> str:
     """Resolve the OpenAI API key from env or Streamlit secrets."""
@@ -146,6 +183,8 @@ def analyze_with_openai(image_png_bytes: bytes, api_key: str) -> str:
 def main():
     st.set_page_config(page_title="Chart Pattern Analyzer", layout="wide")
     st.title("Chart Pattern Analyzer (Streamlit)")
+    if not require_login():
+        st.stop()
 
     # Inputs
     col1, col2, col3 = st.columns([2, 2, 1])
@@ -212,5 +251,6 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
 
