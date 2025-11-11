@@ -8,7 +8,7 @@ import pandas as pd
 import yfinance as yf
 import mplfinance as mpf
 from matplotlib.lines import Line2D
-from dotenv import load_dotenv
+
 
 # OpenAI Responses API
 try:
@@ -19,10 +19,9 @@ except Exception:  # pragma: no cover
 
 def get_api_key() -> str:
     """Resolve the OpenAI API key from env or Streamlit secrets."""
-    load_dotenv()  # loads from .env if present in this folder
+     # loads from .env if present in this folder
     key = (
-        os.getenv("OPENAI_API_KEY")
-        or st.secrets.get("OPENAI_API_KEY") if hasattr(st, "secrets") else None
+         st.secrets.get("OPENAI_API_KEY") if hasattr(st, "secrets") else None
     )
     return key or ""
 
