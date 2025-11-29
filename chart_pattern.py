@@ -165,8 +165,10 @@ def analyze_with_openai(image_png_bytes: bytes, api_key: str) -> str:
 
     b64 = base64.b64encode(image_png_bytes).decode("utf-8")
     data_url = f"data:image/png;base64,{b64}"
-    img_path = Path("chart-patterns.jpeg")  # change this
-    with img_path.open("rb") as f:
+    # img_path = Path("chart-patterns.jpeg")  # change this
+    # with img_path.open("rb") as f:
+    #     img_bytes = f.read()
+    with open("chart-patterns.jpeg", "rb") as f:
         img_bytes = f.read()
 
     b64_2 = base64.b64encode(img_bytes).decode("utf-8")
