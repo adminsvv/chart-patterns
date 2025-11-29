@@ -149,7 +149,7 @@ def plot_chart(df: pd.DataFrame, ticker: str, end_date: dt.date):
 #     "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
 # )
 PATTERN_PROMPT = (
-    "You are provided the actual chart image and image of different patterns. Based on it identofy the pattern and give reasoning\n"
+    "You are provided the actual chart image and image of different patterns. Based on it identify the different patterns that are forming along with the dates when they are formeed. Do provide reasoning for each of the chart and patterns\n"
      "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
 )
 
