@@ -78,9 +78,9 @@ def download_prices(ticker: str, end_date: dt.date, lookback_days: int = 200) ->
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = df.columns.droplevel(1)
     if df.shape[1] == 6:
-        df.columns = ["Open","High","Low","Close","Adj Close","Volume"]
+        df.columns = ["Close","High","Low","Open","Adj Close","Volume"]
     elif df.shape[1] == 5:
-        df.columns = ["Open","High","Low","Close","Volume"]
+        df.columns = ["Close","High","Low","Open","Volume"]
     else:
         raise RuntimeError(f"Unexpected columns: {list(df.columns)}")
 
