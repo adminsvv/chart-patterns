@@ -181,21 +181,17 @@ Confirmation A breakout is considered more reliable when it is accompanied by an
 Entry Point For an ascending triangle, a trader would typically enter a long position after the price breaks above the resistance line. For a descending triangle, a short position would be considered after the price breaks below the support line. For a symmetrical triangle, the entry is in the direction of the confirmed breakout.
 Stop-Loss and Price Target A stop-loss order is usually placed just outside the opposite side of the breakout to manage risk. The potential price target after a breakout is often estimated by measuring the height of the widest part of the triangle and projecting that distance from the breakout point.
 
-Cup and handle
-The cup and handle is a bullish continuation pattern in technical analysis that suggests a pause in an uptrend before the price moves higher. It is identified by a U-shaped "cup" followed by a downward-sloping "handle" that forms a consolidation period. Traders watch for a breakout above the handle's upper trendline, often confirmed by an increase in trading volume, to signal a potential buying opportunity. 
-Formation of the pattern
-The Cup: A rounded, U-shaped bottom forms after a sustained uptrend, representing a temporary price decline and recovery.
-The Handle: A minor downturn follows the cup, creating a shorter consolidation period that looks like a handle on a teacup. 
-Trading the pattern
-Entry: A buy order is typically placed slightly above the upper trendline of the handle, anticipating a breakout.
-Volume: A valid pattern shows decreasing volume during the formation of the cup and handle, followed by a sharp increase in volume during the breakout.
-Exit: A stop-loss order is often placed just below the low point of the handle to limit potential losses. 
-Key characteristics
-Bullish continuation: The pattern signals that the previous uptrend is likely to continue.
-Timeframe: The pattern is more reliable on longer-term charts, such as daily or weekly timeframes, and can take weeks or months to form.
-Reliability: The success rate of the pattern increases with longer-term trading horizons.
-Inverted pattern: The inverse, or "inverted cup and handle," is a bearish pattern that suggests a potential trend reversal to the downside.
+Cup and handle: 
 
+A fall from swing high Price level A. Gradually strength of toward down side get reduces. And gradually stock start recovering. Recovery must be gradual U shaped recovery from bottom which I will quote as price level B. recovery will continue till the point Price level A an made almost same high . Recover with V shape must not be consider.
+
+after recovery stock must recover up to previous swing high  price level A . And again we see small deep on chart . deep on the must be less than 50% of, recovery from the bottom price level B to high price level A. 
+
+handle will complete on the on price point A. and form one flat line jointing all price point A.
+
+
+
+Volume must contract during all downside movement in cup and handle. And should expand while price recovery is happening in the form of U Shap.
 123 pattern
 How the pattern works
 Point 1: The initial highest point in a downtrend or the lowest point in an uptrend.
