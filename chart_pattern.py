@@ -133,88 +133,88 @@ def plot_chart(df: pd.DataFrame, ticker: str, end_date: dt.date):
     return fig, axes
 
 
-# PATTERN_PROMPT = (
-#     "Based on the image provided identify the trading chart pattern and give reasoning\n"
-#     "The charts should be mainly among these patterns:\n\n"
-#     "Step Chart – Shows price moving in distinct horizontal and vertical steps, reflecting consolidation phases followed by sharp directional moves.\n\n"
-#     "Flag – A short consolidation channel after a strong trend, signaling continuation once the flag breaks in the trend’s direction.\n\n"
-#     "Pennant – A small symmetrical triangle following a sharp price move, indicating trend continuation after a brief pause.\n\n"
-#     "1-2-3 Pattern – 1 = sharp up move, 2 = slight move down against the prevailing trend, 3 = break the high of 1 sharp move.\n\n"
-#     "Cup and Handle – A rounded U shape followed by a small dip, suggesting accumulation before a bullish breakout.\n\n"
-#     "Triangle – Converging trendlines showing price compression, typically resolving in a breakout aligned with the prevailing trend.\n\n"
-#     "Low Cheat – After an uptrend a slight correction and a small range consolidation. Once the price breaks out of this consolidation its a buy signal/\n\n"
-#     "VCP (Volatility Contraction Pattern) – Series of smaller pullbacks with decreasing volatility and volume, showing supply drying up before a high-volume breakout from resistance.\n\n"
-#     "Inverted Head and Shoulders – A three-trough reversal formation where the middle trough is deepest, signaling a bullish reversal.\n\n"
-#     "Engulfing / Reversal – A candlestick where a larger candle fully covers the previous one,with close of the current candle below the last candle low  possibly signaling a trend change, especially at key support/resistance.\n\n"
-#     "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
-# )
 PATTERN_PROMPT = (
-    "You are provided the actual chart image and image of different patterns. Based on it identify the different patterns that are forming along with the dates when they are formeed. Do provide reasoning for each of the chart and patterns\n"
-     "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
+    "Based on the image provided identify the trading chart patterns and provide the dates and give reasoning\n"
+    "The charts should be mainly among these patterns:\n\n"
+    "Step Chart – Shows price moving in distinct horizontal and vertical steps, reflecting consolidation phases followed by sharp directional moves.\n\n"
+    "Flag – A short consolidation channel after a strong trend, signaling continuation once the flag breaks in the trend’s direction.\n\n"
+    "Pennant – A small symmetrical triangle following a sharp price move, indicating trend continuation after a brief pause.\n\n"
+    "1-2-3 Pattern – 1 = sharp up move, 2 = slight move down against the prevailing trend, 3 = break the high of 1 sharp move.\n\n"
+    "Cup and Handle – A rounded U shape followed by a small dip, suggesting accumulation before a bullish breakout.\n\n"
+    "Triangle – Converging trendlines showing price compression, typically resolving in a breakout aligned with the prevailing trend.\n\n"
+    "Low Cheat – After an uptrend a slight correction and a small range consolidation. Once the price breaks out of this consolidation its a buy signal/\n\n"
+    "VCP (Volatility Contraction Pattern) – Series of smaller pullbacks with decreasing volatility and volume, showing supply drying up before a high-volume breakout from resistance.\n\n"
+    "Inverted Head and Shoulders – A three-trough reversal formation where the middle trough is deepest, signaling a bullish reversal.\n\n"
+    "Engulfing / Reversal – A candlestick where a larger candle fully covers the previous one,with close of the current candle below the last candle low  possibly signaling a trend change, especially at key support/resistance.\n\n"
+    "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
 )
-PATTERN_PROMPT=f"""
-You are provided the actual chart image Based on it identify the different patterns that are forming along with the dates when they are formeed. Do provide reasoning for each of the chart and patterns\
-Flag Pattern:
-- Identify a strong trend: Look for a sharp price move in one direction forming the flagpole.
-- Observe consolidation: Price then moves sideways in a narrow rectangular or slight channel, forming the flag. The consolidation is brief (few days to weeks).
-- Volume behavior: High volume during the flagpole, reduced volume during consolidation, and increased volume on breakout.
-- Types:
-    • Bullish Flag – Upward flagpole, slight downward/sideways consolidation. Continuation expected upward.
-    • Bearish Flag – Downward flagpole, slight upward/sideways consolidation. Continuation expected downward.
-- Trading Use:
-    • Entry – Long above flag resistance or short below flag support.
-    • Target – Measure flagpole length and project from breakout.
-    • Stop-loss – Below flag’s lower trendline for bullish, above upper trendline for bearish.
+# PATTERN_PROMPT = (
+#     "You are provided the actual chart image and image of different patterns. Based on it identify the different patterns that are forming along with the dates when they are formeed. Do provide reasoning for each of the chart and patterns\n"
+#      "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
+# )
+# PATTERN_PROMPT=f"""
+# You are provided the actual chart image Based on it identify the different patterns that are forming along with the dates when they are formeed. Do provide reasoning for each of the chart and patterns\
+# Flag Pattern:
+# - Identify a strong trend: Look for a sharp price move in one direction forming the flagpole.
+# - Observe consolidation: Price then moves sideways in a narrow rectangular or slight channel, forming the flag. The consolidation is brief (few days to weeks).
+# - Volume behavior: High volume during the flagpole, reduced volume during consolidation, and increased volume on breakout.
+# - Types:
+#     • Bullish Flag – Upward flagpole, slight downward/sideways consolidation. Continuation expected upward.
+#     • Bearish Flag – Downward flagpole, slight upward/sideways consolidation. Continuation expected downward.
+# - Trading Use:
+#     • Entry – Long above flag resistance or short below flag support.
+#     • Target – Measure flagpole length and project from breakout.
+#     • Stop-loss – Below flag’s lower trendline for bullish, above upper trendline for bearish.
 
-Pennant Pattern:
-- Structure: Strong, fast price move first creates the flagpole, followed by a small symmetrical triangle (pennant) formed by converging trendlines.
-- Breakout: Typically occurs in the same direction as the prior trend, confirming continuation.
-- Key Characteristics:
-    • Shape – A tiny symmetrical triangle (unlike the parallel lines of a flag).
-    • Volume – Heavy during flagpole, low inside pennant, and surges at breakout.
-    • Duration – Ideally 1–4 weeks; beyond 12 weeks becomes a symmetrical triangle.
-- Purpose: Used to anticipate continuation of a prevailing trend and identify clean entry/exit points.
-Triangle Pattern
-How to Trade Triangle Patterns
-Traders use triangle patterns to identify potential entry and exit points and manage risk. The general approach involves waiting for a confirmed breakout (or breakdown) before entering a trade. 
-Confirmation A breakout is considered more reliable when it is accompanied by an increase in trading volume and a decisive close beyond the trendline.
-Entry Point For an ascending triangle, a trader would typically enter a long position after the price breaks above the resistance line. For a descending triangle, a short position would be considered after the price breaks below the support line. For a symmetrical triangle, the entry is in the direction of the confirmed breakout.
-Stop-Loss and Price Target A stop-loss order is usually placed just outside the opposite side of the breakout to manage risk. The potential price target after a breakout is often estimated by measuring the height of the widest part of the triangle and projecting that distance from the breakout point.
+# Pennant Pattern:
+# - Structure: Strong, fast price move first creates the flagpole, followed by a small symmetrical triangle (pennant) formed by converging trendlines.
+# - Breakout: Typically occurs in the same direction as the prior trend, confirming continuation.
+# - Key Characteristics:
+#     • Shape – A tiny symmetrical triangle (unlike the parallel lines of a flag).
+#     • Volume – Heavy during flagpole, low inside pennant, and surges at breakout.
+#     • Duration – Ideally 1–4 weeks; beyond 12 weeks becomes a symmetrical triangle.
+# - Purpose: Used to anticipate continuation of a prevailing trend and identify clean entry/exit points.
+# Triangle Pattern
+# How to Trade Triangle Patterns
+# Traders use triangle patterns to identify potential entry and exit points and manage risk. The general approach involves waiting for a confirmed breakout (or breakdown) before entering a trade. 
+# Confirmation A breakout is considered more reliable when it is accompanied by an increase in trading volume and a decisive close beyond the trendline.
+# Entry Point For an ascending triangle, a trader would typically enter a long position after the price breaks above the resistance line. For a descending triangle, a short position would be considered after the price breaks below the support line. For a symmetrical triangle, the entry is in the direction of the confirmed breakout.
+# Stop-Loss and Price Target A stop-loss order is usually placed just outside the opposite side of the breakout to manage risk. The potential price target after a breakout is often estimated by measuring the height of the widest part of the triangle and projecting that distance from the breakout point.
 
-Cup and handle: 
+# Cup and handle: 
 
-A fall from swing high Price level A. Gradually strength of toward down side get reduces. And gradually stock start recovering. Recovery must be gradual U shaped recovery from bottom which I will quote as price level B. recovery will continue till the point Price level A an made almost same high . Recover with V shape must not be consider.
+# A fall from swing high Price level A. Gradually strength of toward down side get reduces. And gradually stock start recovering. Recovery must be gradual U shaped recovery from bottom which I will quote as price level B. recovery will continue till the point Price level A an made almost same high . Recover with V shape must not be consider.
 
-after recovery stock must recover up to previous swing high  price level A . And again we see small deep on chart . deep on the must be less than 50% of, recovery from the bottom price level B to high price level A. 
+# after recovery stock must recover up to previous swing high  price level A . And again we see small deep on chart . deep on the must be less than 50% of, recovery from the bottom price level B to high price level A. 
 
-handle will complete on the on price point A. and form one flat line jointing all price point A.
-
-
-
-Volume must contract during all downside movement in cup and handle. And should expand while price recovery is happening in the form of U Shap.
-123 pattern
-How the pattern works
-Point 1: The initial highest point in a downtrend or the lowest point in an uptrend.
-Point 2: The first retracement from point 1, forming a lower high in a downtrend or a higher low in an uptrend.
-Point 3: The point where the price pulls back again but does not go as far as point 1. The pattern is confirmed, and a trade entry is signaled, once the price moves past point 2.
-
-Step chart
-
-Ascending step chart pattern (Uptrend)
-Formation: The price makes a series of higher highs and higher lows, creating an upward "staircase" effect.
-Market psychology: This pattern suggests that buying pressure is dominant, leading to a sustained upward trend.
-Example: A pattern where a stock price moves up, pulls back, and then moves up again to make a higher high than before, and then pulls back to a higher low. 
-Descending step chart pattern (Downtrend) 
-Formation: The price makes a series of lower highs and lower lows, resembling a downward "staircase".
-Market psychology: This pattern indicates that selling pressure is stronger than buying pressure, and the price is in a downtrend.
-Example: A pattern where a stock price moves down, rallies slightly, and then moves down again to make a lower low than before, and then rallies to a lower high. 
-Key characteristics
-Trend identification: Step patterns are fundamentally a way to visualize the current trend.
-Bullish or bearish: An ascending step pattern is a bullish signal, while a descending one is bearish.
-Strength: The clarity of the steps can indicate the strength of the trend. A clear, consistent pattern shows a strong trend, whereas a messy or unclear pattern may signal a weaker trend or consolidation.
+# handle will complete on the on price point A. and form one flat line jointing all price point A.
 
 
-"""
+
+# Volume must contract during all downside movement in cup and handle. And should expand while price recovery is happening in the form of U Shap.
+# 123 pattern
+# How the pattern works
+# Point 1: The initial highest point in a downtrend or the lowest point in an uptrend.
+# Point 2: The first retracement from point 1, forming a lower high in a downtrend or a higher low in an uptrend.
+# Point 3: The point where the price pulls back again but does not go as far as point 1. The pattern is confirmed, and a trade entry is signaled, once the price moves past point 2.
+
+# Step chart
+
+# Ascending step chart pattern (Uptrend)
+# Formation: The price makes a series of higher highs and higher lows, creating an upward "staircase" effect.
+# Market psychology: This pattern suggests that buying pressure is dominant, leading to a sustained upward trend.
+# Example: A pattern where a stock price moves up, pulls back, and then moves up again to make a higher high than before, and then pulls back to a higher low. 
+# Descending step chart pattern (Downtrend) 
+# Formation: The price makes a series of lower highs and lower lows, resembling a downward "staircase".
+# Market psychology: This pattern indicates that selling pressure is stronger than buying pressure, and the price is in a downtrend.
+# Example: A pattern where a stock price moves down, rallies slightly, and then moves down again to make a lower low than before, and then rallies to a lower high. 
+# Key characteristics
+# Trend identification: Step patterns are fundamentally a way to visualize the current trend.
+# Bullish or bearish: An ascending step pattern is a bullish signal, while a descending one is bearish.
+# Strength: The clarity of the steps can indicate the strength of the trend. A clear, consistent pattern shows a strong trend, whereas a messy or unclear pattern may signal a weaker trend or consolidation.
+
+
+# """
 
 
 
