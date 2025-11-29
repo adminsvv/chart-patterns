@@ -152,6 +152,30 @@ PATTERN_PROMPT = (
     "You are provided the actual chart image and image of different patterns. Based on it identify the different patterns that are forming along with the dates when they are formeed. Do provide reasoning for each of the chart and patterns\n"
      "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
 )
+PATTERN_PROMPT=f"""
+You are provided the actual chart image Based on it identify the different patterns that are forming along with the dates when they are formeed. Do provide reasoning for each of the chart and patterns\
+Flag Pattern:
+- Identify a strong trend: Look for a sharp price move in one direction forming the flagpole.
+- Observe consolidation: Price then moves sideways in a narrow rectangular or slight channel, forming the flag. The consolidation is brief (few days to weeks).
+- Volume behavior: High volume during the flagpole, reduced volume during consolidation, and increased volume on breakout.
+- Types:
+    • Bullish Flag – Upward flagpole, slight downward/sideways consolidation. Continuation expected upward.
+    • Bearish Flag – Downward flagpole, slight upward/sideways consolidation. Continuation expected downward.
+- Trading Use:
+    • Entry – Long above flag resistance or short below flag support.
+    • Target – Measure flagpole length and project from breakout.
+    • Stop-loss – Below flag’s lower trendline for bullish, above upper trendline for bearish.
+
+Pennant Pattern:
+- Structure: Strong, fast price move first creates the flagpole, followed by a small symmetrical triangle (pennant) formed by converging trendlines.
+- Breakout: Typically occurs in the same direction as the prior trend, confirming continuation.
+- Key Characteristics:
+    • Shape – A tiny symmetrical triangle (unlike the parallel lines of a flag).
+    • Volume – Heavy during flagpole, low inside pennant, and surges at breakout.
+    • Duration – Ideally 1–4 weeks; beyond 12 weeks becomes a symmetrical triangle.
+- Purpose: Used to anticipate continuation of a prevailing trend and identify clean entry/exit points.
+
+"""
 
 
 
@@ -181,8 +205,8 @@ def analyze_with_openai(image_png_bytes: bytes, api_key: str) -> str:
                 "role": "user",
                 "content": [
                     {"type": "input_text", "text": PATTERN_PROMPT},
-                    {"type": "input_image", "image_url": data_url},
-                    {"type": "input_image", "image_url": data_url_2},
+                    {"type": "input_image", "image_url": data_url}
+                   # {"type": "input_image", "image_url": data_url_2},
                 ],
             }
         ],
