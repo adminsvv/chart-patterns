@@ -133,21 +133,26 @@ def plot_chart(df: pd.DataFrame, ticker: str, end_date: dt.date):
     return fig, axes
 
 
+# PATTERN_PROMPT = (
+#     "Based on the image provided identify the trading chart pattern and give reasoning\n"
+#     "The charts should be mainly among these patterns:\n\n"
+#     "Step Chart – Shows price moving in distinct horizontal and vertical steps, reflecting consolidation phases followed by sharp directional moves.\n\n"
+#     "Flag – A short consolidation channel after a strong trend, signaling continuation once the flag breaks in the trend’s direction.\n\n"
+#     "Pennant – A small symmetrical triangle following a sharp price move, indicating trend continuation after a brief pause.\n\n"
+#     "1-2-3 Pattern – 1 = sharp up move, 2 = slight move down against the prevailing trend, 3 = break the high of 1 sharp move.\n\n"
+#     "Cup and Handle – A rounded U shape followed by a small dip, suggesting accumulation before a bullish breakout.\n\n"
+#     "Triangle – Converging trendlines showing price compression, typically resolving in a breakout aligned with the prevailing trend.\n\n"
+#     "Low Cheat – After an uptrend a slight correction and a small range consolidation. Once the price breaks out of this consolidation its a buy signal/\n\n"
+#     "VCP (Volatility Contraction Pattern) – Series of smaller pullbacks with decreasing volatility and volume, showing supply drying up before a high-volume breakout from resistance.\n\n"
+#     "Inverted Head and Shoulders – A three-trough reversal formation where the middle trough is deepest, signaling a bullish reversal.\n\n"
+#     "Engulfing / Reversal – A candlestick where a larger candle fully covers the previous one,with close of the current candle below the last candle low  possibly signaling a trend change, especially at key support/resistance.\n\n"
+#     "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
+# )
 PATTERN_PROMPT = (
-    "Based on the image provided identify the trading chart pattern and give reasoning\n"
-    "The charts should be mainly among these patterns:\n\n"
-    "Step Chart – Shows price moving in distinct horizontal and vertical steps, reflecting consolidation phases followed by sharp directional moves.\n\n"
-    "Flag – A short consolidation channel after a strong trend, signaling continuation once the flag breaks in the trend’s direction.\n\n"
-    "Pennant – A small symmetrical triangle following a sharp price move, indicating trend continuation after a brief pause.\n\n"
-    "1-2-3 Pattern – 1 = sharp up move, 2 = slight move down against the prevailing trend, 3 = break the high of 1 sharp move.\n\n"
-    "Cup and Handle – A rounded U shape followed by a small dip, suggesting accumulation before a bullish breakout.\n\n"
-    "Triangle – Converging trendlines showing price compression, typically resolving in a breakout aligned with the prevailing trend.\n\n"
-    "Low Cheat – After an uptrend a slight correction and a small range consolidation. Once the price breaks out of this consolidation its a buy signal/\n\n"
-    "VCP (Volatility Contraction Pattern) – Series of smaller pullbacks with decreasing volatility and volume, showing supply drying up before a high-volume breakout from resistance.\n\n"
-    "Inverted Head and Shoulders – A three-trough reversal formation where the middle trough is deepest, signaling a bullish reversal.\n\n"
-    "Engulfing / Reversal – A candlestick where a larger candle fully covers the previous one,with close of the current candle below the last candle low  possibly signaling a trend change, especially at key support/resistance.\n\n"
-    "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
+    "You are provided the actual chart image and image of different patterns. Based on it identofy the pattern and give reasoning\n"
+     "Leave blank or mention if no pattern is found if none of these patterns are found in the chart.\n"
 )
+
 
 
 def analyze_with_openai(image_png_bytes: bytes, api_key: str) -> str:
@@ -160,6 +165,12 @@ def analyze_with_openai(image_png_bytes: bytes, api_key: str) -> str:
 
     b64 = base64.b64encode(image_png_bytes).decode("utf-8")
     data_url = f"data:image/png;base64,{b64}"
+    img_path = Path("chart-patterns.jpeg")  # change this
+    with img_path.open("rb") as f:
+        img_bytes = f.read()
+
+    b64_2 = base64.b64encode(img_bytes).decode("utf-8")
+    data_url_2 = f"data:image/png;base64,{b64_2}"
 
     response = client.responses.create(
         model="gpt-4.1",
@@ -169,6 +180,7 @@ def analyze_with_openai(image_png_bytes: bytes, api_key: str) -> str:
                 "content": [
                     {"type": "input_text", "text": PATTERN_PROMPT},
                     {"type": "input_image", "image_url": data_url},
+                    {"type": "input_image", "image_url": data_url_2},
                 ],
             }
         ],
